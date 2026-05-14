@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Path of the Cricket Player Sponsorship Application</title>
+    <style>
+        /* --- CSS (styles.css content) --- */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #000000; /* Dark Teal */
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            border-bottom: 2px solid #004d40;
+            padding-bottom: 5px;
+            color: #004d40;
+            margin-top: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="tel"],
+        .form-group input[type="file"],
+        .form-group input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-top: 5px;
+        }
+
+        .agreement-group p {
+            font-weight: bold;
+            margin-top: 0;
+        }
+
+        .agreement-group label, .checkbox-group label {
+            font-weight: normal;
+            display: inline;
+            margin-right: 20px;
+        }
+        
+        .agreement-group input[type="radio"], .checkbox-group input[type="checkbox"] {
+            margin-right: 5px;
+        }
+
+        .face-auth button, #applyButton {
+            background-color: #ff6f00; /* Orange */
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        #applyButton {
+            display: block;
+            width: 100%;
+            margin-top: 20px;
+            background-color: #2e7d32; /* Green for apply */
+        }
+
+        #applyButton:hover {
+            background-color: #1b5e20;
+        }
+
+        .face-auth button:hover {
+            background-color: #e65100;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Path of the Cricket  Sponsorship Application</h1>
+    </header>
+
+    <main>
+        <form id="sponsorshipForm">
+            <h2>Player Personal Details</h2>
+            <div class="form-group">
+                <label for="firstName">Full Name (First Name):</label>
+                <input type="text" id="firstName" name="firstName" required>
+            </div>
+            <div class="form-group">
+                <label for="lastName">Full Name (Last Name):</label>
+                <input type="text" id="lastName" name="lastName" required>
+            </div>
+            <div class="form-group">
+                <label for="address">Address:</label>
+                <input type="text" id="address" name="address" required>
+            </div>
+            <div class="form-group">
+                <label for="contactNumber">Contact Number:</label>
+                <input type="tel" id="contactNumber" name="contactNumber" pattern="[0-9]{10}" placeholder="e.g., 0712345678" required>
+            </div>
+            <div class="form-group">
+                <label for="idNumber">ID Number:</label>
+                <input type="text" id="idNumber" name="idNumber" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <h2>Cricket & Geographic Details</h2>
+            <div class="form-group">
+                <label for="playerID">Player ID:</label>
+                <input type="text" id="playerID" name="playerID" required>
+            </div>
+            <div class="form-group">
+                <label for="district">District:</label>
+                <input type="text" id="district" name="district" required>
+            </div>
+            <div class="form-group">
+                <label for="division">Division:</label>
+                <input type="text" id="division" name="division" required>
+            </div>
+
+            <h2>Document Upload</h2>
+            <div class="form-group">
+                <label for="gsCertificate">GS Certificate (PDF Upload):</label>
+                <input type="file" id="gsCertificate" name="gsCertificate" accept=".pdf" required>
+            </div>
+            
+            <h2>Agreement and Verification</h2>
+            <div class="form-group agreement-group">
+                <p>Do you agree to the Terms and Conditions?</p>
+                <input type="radio" id="agree" name="agreement" value="agree" required>
+                <label for="agree">Agree</label>
+                <input type="radio" id="disagree" name="agreement" value="disagree">
+                <label for="disagree">Disagree</label>
+            </div>
+            
+            <div class="form-group checkbox-group">
+                <input type="checkbox" id="notRobot" name="notRobot" required>
+                <label for="notRobot">I'm not a robot 🤖</label>
+            </div>
+
+            <div class="form-group face-auth">
+                <label>Face Authentication (Required for verification):</label>
+                <button type="button" id="faceAuthButton">Start Face Authentication</button>
+                <input type="hidden" id="faceAuthStatus" name="faceAuthStatus" value="pending">
+                <p id="authMessage" style="color:red;"></p>
+            </div>
+
+            <button type="submit" id="applyButton">Apply for Sponsorship</button>
+        </form>
+    </main>
+
+    <script>
+        // --- JavaScript (Compiled from script.ts) ---
+
+        // Get form elements
+        const form = document.getElementById('sponsorshipForm');
+        const faceAuthButton = document.getElementById('faceAuthButton');
+        const faceAuthStatus = document.getElementById('faceAuthStatus');
+        const authMessage = document.getElementById('authMessage');
+
+        // Placeholder function for face authentication
+        function startFaceAuthentication() {
+            authMessage.style.color = 'blue';
+            authMessage.textContent = "Initiating Face Authentication...";
+            faceAuthButton.disabled = true;
+
+            // Simulate a network/API call delay
+            setTimeout(() => {
+                // In a real application, this would use the browser's camera API (getUserMedia) 
+                // and a secure backend service for biometric verification.
+                
+                // 50% chance of success for demo purposes
+                const isAuthenticated = Math.random() > 0.5; 
+
+                if (isAuthenticated) {
+                    faceAuthStatus.value = 'success';
+                    authMessage.style.color = 'green';
+                    authMessage.textContent = "✅ Face Authentication Successful!";
+                    faceAuthButton.textContent = "Authenticated";
+                    faceAuthButton.disabled = true;
+                } else {
+                    faceAuthStatus.value = 'failed';
+                    authMessage.style.color = 'red';
+                    authMessage.textContent = "❌ Face Authentication Failed. Please try again.";
+                    faceAuthButton.textContent = "Start Face Authentication";
+                    faceAuthButton.disabled = false;
+                }
+            }, 2000); // 2 second delay
+        }
+
+        // Event listener for the face authentication button
+        if (faceAuthButton) {
+            faceAuthButton.addEventListener('click', (e) => {
+                e.preventDefault(); 
+                startFaceAuthentication();
+            });
+        }
+
+        // Event listener for form submission
+        if (form) {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault(); 
+
+                const formData = new FormData(form);
+                
+                const agreementStatus = formData.get('agreement');
+                const authStatus = faceAuthStatus.value;
+
+                if (agreementStatus === 'disagree') {
+                    alert("🚫 You must AGREE to the Terms and Conditions to proceed.");
+                    return;
+                }
+
+                if (!formData.get('notRobot')) {
+                    alert("🚫 Please check the 'I'm not a robot' box.");
+                    return;
+                }
+                
+                if (authStatus !== 'success') {
+                    alert("🚫 Face Authentication is required and must be successful before applying.");
+                    return;
+                }
+
+                // --- Form Data Extraction & Submission Logic ---
+                
+                // Convert form data to a simple object for display
+                const data = {};
+                formData.forEach((value, key) => {
+                    if (key !== 'gsCertificate') { // Exclude file for console log simplicity
+                        data[key] = value;
+                    }
+                });
+                
+                const gsCertificateFile = formData.get('gsCertificate');
+
+                // In a real application, you would now use the fetch API to send 
+                // the `formData` object (including the PDF file) to a secure server.
+                
+                console.log("--- SUBMITTING APPLICATION DATA ---");
+                console.log("Player Details:", data);
+                console.log("GS Certificate File Status:", gsCertificateFile instanceof File ? `File Name: ${gsCertificateFile.name}, Size: ${gsCertificateFile.size} bytes` : 'No file data found');
+                
+                alert("✅ Application Submitted Successfully! (Check your browser's console for the data log.)");
+                
+                // Optional: Clear the form after successful submission
+                // form.reset(); 
+            });
+        }
+    </script>
+</body>
+</html>
